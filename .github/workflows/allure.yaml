@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12' # In command line run “node -v” and choose your version
-      - run: npm i
+      - run: npm ci
 #      - run: npm config set script-shell "C:\Program Files\Git\bin\bash.exe"
       - name: run test
         run: npm run test:headless # Our name of the headless script
