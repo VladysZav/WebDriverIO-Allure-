@@ -5,19 +5,16 @@ on:
       - 'main' # Set branch of the GH repo to push
 jobs:
   test_suite: # Name of the job
-      runs-on: ubuntu-20.04 # Choosing OS
+      runs-on: ubuntu-latest # Choosing OS
       steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '12' # In command line run “node -v” and choose your version
-      - run: npm ci
+      - run: npm i
 #      - run: npm config set script-shell "C:\Program Files\Git\bin\bash.exe"
       - name: run test
         run: npm run test:headless # Our name of the headless script
-      - name: Copy History
-        if: always()
-        run: cp -r $(pwd)/docs/history/. $(pwd)/allure-results/history
       - name: Generate Report
         if: always()
         run: npm run allure:generate # Name of the allure generate script
@@ -37,17 +34,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.4
         if: always()
         with:
-          branch: master # The branch the action should deploy to.
+          branch: gh-paged # The branch the action should deploy to.
           folder: allure-report # The folder the action should deploy.
           target-folder: docs
-      - name: Pushes docs to another repository
-        uses: cpina/github-action-push-to-another-repository@v1.3
-        if: always()
-        env:
-          API_TOKEN_GITHUB: ${{ 'YOUR TOKEN' }} # Instruction where to get token is below
-        with:
-          source-directory: 'docs'
-          destination-github-username: 'username' # Your username
-          destination-repository-name: 'reponame' # Name of your repo
-          user-email: user@gmail.com # Your email
-          target-branch: main
+     
