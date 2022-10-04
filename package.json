@@ -24,7 +24,9 @@
         "allure:generate": "allure generate ./allure-results --clean",
         "allure:open": "allure open ./allure-report",
         "prod": "cross-env NODE_ENV=production webpack",
-        "dev": "cross-env NODE_ENV=development webpack"
+        "dev": "cross-env NODE_ENV=development webpack",
+        "test:headless":"npx wdio wdio.chrome.headless.conf.js",
+        "allure:serve":"npx allure serve allure-results"
     },
     "dependencies": {
         "allure-commandline": "^2.18.1",
