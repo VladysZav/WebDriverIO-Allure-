@@ -14,7 +14,7 @@ jobs:
       - run: npm ci
 #      - run: npm config set script-shell "C:\Program Files\Git\bin\bash.exe"
       - name: run test
-        run: npx wdio wdioWithChrome.conf.js # Our name of the headless script
+        run:  npx wdio # Our name of the headless script
       - name: Generate Report
         if: always()
         run: npm run allure:generate # Name of the allure generate script
